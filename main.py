@@ -24,7 +24,7 @@ def get_markets_shares(list_of_funds):
             data = src.content.decode('utf8')
             data = pd.read_csv(io.StringIO(data))
             data.dropna(axis=0, inplace=True)
-            data = data.filter(['company', 'market value($)', 'ticker'])
+            data = data.filter(['company', 'market value($)'])
             for company in data['company']:
                 if company in mydict.keys():
                     market_value = data[data['company']
@@ -35,8 +35,7 @@ def get_markets_shares(list_of_funds):
                                         == company]['market value($)'].values
                     mydict[company] = int(market_value[0])
 
-    dataframe = making_pretty(mydict)
-    return dataframe
+    return making_pretty(mydict)
 
 
 ark_etfs = [
